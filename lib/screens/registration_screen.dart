@@ -21,55 +21,69 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      appBar: AppBar(),
-      body: ListView(
-        children: [
-          const CircleAvatar(radius: 50,),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: firstNameTec,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'First name',
+      appBar: AppBar(
+       backgroundColor: Colors.teal[100],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(15.0),
+                child: CircleAvatar(radius: 50, backgroundImage: AssetImage('assets/images/none_avatar.png'),),
               ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: lastNameTec,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Last name',
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: firstNameTec,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(40),),
+                    labelText: 'First name',
+                  ),
+                ),
               ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: emailTec,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'E-mail address',
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: lastNameTec,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(40),),
+                    labelText: 'Last name',
+                  ),
+                ),
               ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child:  TextField(
-              controller: passwordTec,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: emailTec,
+                  decoration:  InputDecoration(
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(40),),
+                    labelText: 'E-mail',
+                  ),
+                ),
               ),
-            ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child:  TextField(
+                  obscureText: true,
+                  controller: passwordTec,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(40),),
+                    labelText: 'Password',
+                  ),
+                ),
+              ),
+              SizedBox(height: 100,),
+              ElevatedButton(
+                onPressed: () => _onCreatePressed(context),
+                style: ElevatedButton.styleFrom(shape: StadiumBorder(),
+                    fixedSize: Size(100, 40), backgroundColor: Colors.black),
+                child: const Text('SIGN UP'),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => _onCreatePressed(context),
-            child: const Text('CREATE'),
-          ),
-        ],
+        ),
       ),
     ),);
   }

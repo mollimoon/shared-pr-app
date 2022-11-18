@@ -10,42 +10,102 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final _name = prefs.getString(PrefsKeys.firstName);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
-        body: Center(
+        appBar: AppBar(
+          backgroundColor: Colors.teal[100],
+        ),
+        body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: CircleAvatar(radius: 50,),
+              const SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Image.asset(
+                      'assets/images/avatar.png',
+                      width: 120,
+                    )),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "Привет, $_name !",
+                  style: const TextStyle(
+                    fontSize: 28,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text(prefs.getString(PrefsKeys.firstName) ?? '',
-                  style: const TextStyle(
-                  fontSize: 26),
-                ),),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(prefs.getString(PrefsKeys.lastName) ?? '',
-                  style: const TextStyle(
-                      fontSize: 26),),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Name: ',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      prefs.getString(PrefsKeys.firstName) ?? '',
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text(prefs.getString(PrefsKeys.email) ?? '',
-                  style: const TextStyle(
-                      fontSize: 26),),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Last name: ',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      prefs.getString(PrefsKeys.lastName) ?? '',
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
+                child: Row(
+                  children: [
+                    const Text(
+                      'E-mail: ',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      prefs.getString(PrefsKeys.email) ?? '',
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, '/',);
-                    prefs.remove(PrefsKeys.password);
+                    Navigator.pushNamed(
+                      context,
+                      '/auth',
+                    );
+                    prefs.clear();
                   },
                   child: const Text("Log out"),
                 ),
